@@ -1,7 +1,7 @@
 package my.project.todolist;
 
+import my.project.todolist.dao.HibernateSessionFactory;
 import my.project.todolist.dao.ItemEntity;
-import my.project.todolist.model.Task;
 import org.hibernate.Session;
 
 /**
@@ -10,20 +10,15 @@ import org.hibernate.Session;
 public class AppMain {
 
     public static void main(String[] args) {
-        System.out.println("Hibernate tutorial");
-
         Session session = HibernateSessionFactory.getSessionFactory().openSession();
-
         session.beginTransaction();
-
         ItemEntity item = new ItemEntity();
-        item.setDescription("test");
-        item.setCreated(123456);
+        item.setDescription("testLong");
+        item.setCreated(123456l);
         item.setDone(false);
 
         session.save(item);
         session.getTransaction().commit();
-        System.out.println("done");
         session.close();
     }
 }

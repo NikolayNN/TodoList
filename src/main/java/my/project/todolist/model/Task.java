@@ -1,5 +1,7 @@
 package my.project.todolist.model;
 
+import java.util.Date;
+
 /**
  * Created by Nikol on 1/5/2017.
  */
@@ -11,6 +13,13 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
+        created = getCurrentTime();
+        isDone = false;
+    }
+
+    private long getCurrentTime() {
+        Date current = new Date();
+        return current.getTime()/1000;
     }
 
     public void setDone(boolean done) {

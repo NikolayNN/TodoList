@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "item", schema = "public", catalog = "TodoList")
 public class ItemEntity {
     private int id;
-    private Integer created;
+    private Long created;
     private Boolean done;
     private String description;
 
@@ -25,11 +25,11 @@ public class ItemEntity {
 
     @Basic
     @Column(name = "created", nullable = true)
-    public Integer getCreated() {
+    public Long getCreated() {
         return created;
     }
 
-    public void setCreated(Integer created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 

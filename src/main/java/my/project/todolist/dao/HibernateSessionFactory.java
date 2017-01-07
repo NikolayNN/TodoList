@@ -1,4 +1,4 @@
-package my.project.todolist;
+package my.project.todolist.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
