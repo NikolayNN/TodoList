@@ -17,12 +17,13 @@ public class AppMain {
         session.beginTransaction();
 
         ItemEntity item = new ItemEntity();
-        item.setDesc("test");
+        item.setDescription("test");
+        item.setCreated(123456);
         item.setDone(false);
 
         session.save(item);
         session.getTransaction().commit();
-
+        System.out.println("done");
         session.close();
     }
 }

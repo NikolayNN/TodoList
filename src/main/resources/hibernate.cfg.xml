@@ -4,10 +4,11 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
     <property name="connection.url">jdbc:postgresql://localhost:5432/TodoList</property>
-    <property name="connection.driver_class">org.postgresql.Driver</property>
     <property name="connection.username">postgres</property>
     <property name="connection.password">root</property>
-    <mapping class="my.project.todolist.model.Task"/>
+    <property name="connection.driver_class">org.postgresql.Driver</property>
+    <mapping class="my.project.todolist.dao.ItemEntity"/>
   </session-factory>
 </hibernate-configuration>
