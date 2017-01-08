@@ -11,4 +11,7 @@
         <servlet-name>AddTask</servlet-name>
         <url-pattern>/addTask.do</url-pattern>
     </servlet-mapping>
+    <listener>
+        <listener-class>my.project.todolist.controller.listeners.ServletContextListenerImpl</listener-class>
+    </listener>
 </web-app>
