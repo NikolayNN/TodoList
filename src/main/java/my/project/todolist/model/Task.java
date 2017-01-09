@@ -30,6 +30,10 @@ public class Task {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -38,7 +42,21 @@ public class Task {
         return created;
     }
 
+    public void setCreated(long created) {
+        this.created = created;
+    }
+
     public boolean isDone() {
         return isDone;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", created=" + created +
+                ", isDone=" + isDone +
+                '}';
     }
 }

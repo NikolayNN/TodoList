@@ -2,7 +2,6 @@ package my.project.todolist.controller.servlets;
 
 import my.project.todolist.model.Task;
 import my.project.todolist.services.Service;
-import my.project.todolist.services.ServiceImpl;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

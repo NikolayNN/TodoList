@@ -9,5 +9,7 @@ public interface Service {
 
     void addTask(Task task);
 
+    String getTasksXML();
+
     void closeSession();
 }
