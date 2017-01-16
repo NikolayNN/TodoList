@@ -12,8 +12,11 @@ import java.io.IOException;
  * Created by Nikol on 1/7/2017.
  */
 public class AddTask extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         Service service = (Service) request.getServletContext().getAttribute("service");
+        if(request.getParameter("taskDescription") == "") {
+            throw new RuntimeException("task description is null");
+        }
         Task task = new Task(request.getParameter("taskDescription"));
         service.addTask(task);
     }

@@ -14,7 +14,7 @@ public class ItemEntity {
     private String description;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

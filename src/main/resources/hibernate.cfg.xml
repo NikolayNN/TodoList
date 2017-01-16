@@ -6,6 +6,7 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
     <property name="connection.url">jdbc:postgresql://localhost:5432/TodoList</property>
+    <property name="show_sql">true</property>
     <property name="connection.username">postgres</property>
     <property name="connection.password">root</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>

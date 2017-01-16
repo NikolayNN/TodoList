@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class ServiceImpl implements Service {
 
-
     @Override
     public void addTask(Task task){
         Session session = HibernateSessionFactory.getSessionFactory().openSession();
@@ -35,8 +34,8 @@ public class ServiceImpl implements Service {
         Session session = HibernateSessionFactory.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("from ItemEntity");
-        List list = query.list();
         session.getTransaction().commit();
+        List list = query.list();
         for (Object o : list) {
             ItemEntity itemEntity = (ItemEntity) o;
             Task task = new Task(itemEntity.getDescription());
@@ -49,12 +48,30 @@ public class ServiceImpl implements Service {
         return toXML(result);
     }
 
+    public String getLastTask(){
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from ItemEntity order by id DESC");
+        query.setMaxResults(1);
+        ItemEntity last = (ItemEntity) query.uniqueResult();
+        Task result = new Task(last.getDescription());
+        result.setId(last.getId());
+        result.setCreated(last.getCreated());
+        result.setDone(last.getDone());
+        return toXML(result);
+    }
+
     public String toXML(List<Task> tasks) {
         XStream xStream = new XStream();
         xStream.alias("task", Task.class);
         return xStream.toXML(tasks);
     }
 
+    public String toXML(Task task) {
+        XStream xStream = new XStream();
+        xStream.alias("task", Task.class);
+        return xStream.toXML(task);
+    }
 
     @Override
     public void closeSession() {

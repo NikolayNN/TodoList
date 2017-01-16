@@ -10,6 +10,7 @@ public interface Service {
     void addTask(Task task);
 
     String getTasksXML();
+    String getLastTask();
 
     void closeSession();
 }
