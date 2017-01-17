@@ -1,5 +1,6 @@
 package my.project.todolist.controller.listeners;
 
+import my.project.todolist.dao.HibernateManager;
 import my.project.todolist.dao.HibernateSessionFactory;
 import my.project.todolist.services.Service;
 import my.project.todolist.services.ServiceImpl;
@@ -15,6 +16,7 @@ public class ServletContextListenerImpl implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         Service service = new ServiceImpl();
+        service.setDatabaseManager(new HibernateManager());
         servletContextEvent.getServletContext().setAttribute("service", service);
     }
 
