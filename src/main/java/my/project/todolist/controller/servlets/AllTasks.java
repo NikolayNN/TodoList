@@ -3,7 +3,6 @@ package my.project.todolist.controller.servlets;
 import my.project.todolist.services.Service;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ public class AllTasks extends HttpServlet {
         Service service = (Service) request.getServletContext().getAttribute("service");
         response.setContentType("text/html; charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
-        String s = service.getTasksXML();
-        response.getWriter().write(s);
+        response.getWriter().write(service.getTasksInXML());
     }
 }
