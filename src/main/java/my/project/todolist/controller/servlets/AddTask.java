@@ -15,5 +15,6 @@ public class AddTask extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         Service service = (Service) request.getServletContext().getAttribute("service");
         service.addTask(new Task(request.getParameter("taskDescription")));
+        //todo add check empty description
     }
 }
