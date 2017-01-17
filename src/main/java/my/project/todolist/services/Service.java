@@ -1,5 +1,6 @@
 package my.project.todolist.services;
 
+import my.project.todolist.dao.DatabaseManager;
 import my.project.todolist.model.Task;
 
 /**
@@ -7,10 +8,11 @@ import my.project.todolist.model.Task;
  */
 public interface Service {
 
+    void setDatabaseManager(DatabaseManager databaseManager);
+
     void addTask(Task task);
 
-    String getTasksXML();
-    String getLastTask();
+    String getTasksInXML();
 
     void closeSession();
 }
