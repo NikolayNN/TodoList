@@ -19,14 +19,6 @@
         <servlet-name>AllTasks</servlet-name>
         <url-pattern>/allTasks.do</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>LastTask</servlet-name>
-        <servlet-class>my.project.todolist.controller.servlets.LastTask</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LastTask</servlet-name>
-        <url-pattern>/lastTask.do</url-pattern>
-    </servlet-mapping>
     <listener>
         <listener-class>my.project.todolist.controller.listeners.ServletContextListenerImpl</listener-class>
     </listener>

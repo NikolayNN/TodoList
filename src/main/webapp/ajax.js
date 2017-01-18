@@ -2,15 +2,19 @@
 $(document).ready(function() {
 
     $('#addButton').click(function(event) {
-        $.ajax({
-            type: "POST",
-            url: "addTask.do",
-            data: {
-                taskDescription: $('#taskDescription').val()
-            }
-        })
-        $("#table tr").remove();
-        printAllTasks();
+        if ($('#taskDescription').val().length != 0){
+            $.ajax({
+                type: "POST",
+                url: "addTask.do",
+                data: {
+                    taskDescription: $('#taskDescription').val()
+                }
+            })
+            $("#table tr").remove();
+            printAllTasks();
+        }else {
+            alert("input task description!");
+        }
     });
 });
 
