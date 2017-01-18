@@ -14,7 +14,9 @@ import java.io.IOException;
 public class AddTask extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         Service service = (Service) request.getServletContext().getAttribute("service");
+        if(request.getParameter("taskDescription").length() == 0){
+            throw new IllegalArgumentException("Description can not be empty.");
+        }
         service.addTask(new Task(request.getParameter("taskDescription")));
-        //todo add check empty description
     }
 }
