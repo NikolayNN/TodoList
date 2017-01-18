@@ -18,5 +18,12 @@ public class AddTask extends HttpServlet {
             throw new IllegalArgumentException("Description can not be empty.");
         }
         service.addTask(new Task(request.getParameter("taskDescription")));
+        sendMessage(response, service.getTasksInXML());
+    }
+
+    private void sendMessage(HttpServletResponse response, String message) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.getWriter().write(message);
     }
 }
