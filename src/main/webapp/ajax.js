@@ -73,8 +73,26 @@ function drawTable(xml) {
         var description = tasks[i].getElementsByTagName("description")[0].firstChild.data;
         var created = tasks[i].getElementsByTagName("created")[0].firstChild.data;
         var isDone = tasks[i].getElementsByTagName("isDone")[0].firstChild.data;
-        $('#table').append("<tr><td>" + id + "</td><td>" + description + "</td><td>" + created + "</td><td>" + isDone + "</td></tr>");
+        var checked;
+        $('#table').append(
+            "<tr>" +
+                "<td><input class=\"checkboxIsDone\" type=\"checkbox\" id=\"" + id + "\" " + isChecked(isDone) + "></td>" +
+                "<td>" + id + "</td>" +
+                "<td>" + description + "</td>" +
+                "<td>" + created + "</td>" +
+                "<td>" + isDone + "</td>" +
+            "</tr>");
     }
+}
+
+function isChecked(isDone) {
+    var checked;
+    if(isDone.localeCompare("false")){
+        checked = "checked";
+    }else{
+        checked = "";
+    }
+    return checked;
 }
 
 
