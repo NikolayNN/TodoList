@@ -2,14 +2,8 @@ package my.project.todolist.services;
 
 import com.thoughtworks.xstream.XStream;
 import my.project.todolist.dao.DatabaseManager;
-import my.project.todolist.dao.HibernateManager;
-import my.project.todolist.dao.HibernateSessionFactory;
-import my.project.todolist.dao.ItemEntity;
 import my.project.todolist.model.Task;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +24,10 @@ public class ServiceImpl implements Service {
     @Override
     public String getTasksInXML(){
         return toXML(databaseManager.getTasksList());
+    }
+    @Override
+    public String getNotCompletedTasksInXML(){
+        return toXML(databaseManager.getNotCompletedTasksList());
     }
 
     private String toXML(List<Task> tasks) {

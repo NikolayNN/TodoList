@@ -10,5 +10,7 @@ import java.util.List;
 public interface DatabaseManager {
     void addTask(Task task);
     List<Task> getTasksList();
+    List<Task> getNotCompletedTasksList();
     void close();
+
 }

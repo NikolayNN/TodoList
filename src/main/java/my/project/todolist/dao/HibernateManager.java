@@ -45,6 +45,22 @@ public class HibernateManager implements DatabaseManager {
         return result;
     }
 
+    @Override
+    public List<Task> getNotCompletedTasksList() {
+        List<Task> result = new ArrayList<>();
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from ItemEntity where done = false");
+        session.getTransaction().commit();
+        List list = query.list();
+        for (Object o : list) {
+            Task task = createTaskFromItem((ItemEntity) o);
+            result.add(task);
+        }
+        session.close();
+        return result;
+    }
+
     private Task createTaskFromItem(ItemEntity itemEntity){
         Task task = new Task(itemEntity.getDescription());
         task.setId(itemEntity.getId());
@@ -56,7 +72,5 @@ public class HibernateManager implements DatabaseManager {
     public void close(){
         HibernateSessionFactory.shutdown();
     }
-
-
 
 }
