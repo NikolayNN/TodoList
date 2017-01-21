@@ -29,14 +29,25 @@ $(document).ready(function () {
 });
 
 function printAllTasks() {
+    startLoadingAnimation();
     $.ajax({
         type: "POST",
         url: "allTasks.do",
         data: {},
         success: function (responseXML) {
            drawTable(responseXML);
+           stopLoadingAnimation();
         }
     });
+}
+
+function startLoadingAnimation(){
+    var imgObj = $("#loadImg");
+    imgObj.show();
+}
+
+function stopLoadingAnimation(){
+    $("#loadImg").hide();
 }
 
 function checkboxShowNotCompletedTasks() {
@@ -95,7 +106,6 @@ function drawTable(xml) {
         var description = tasks[i].getElementsByTagName("description")[0].firstChild.data;
         var created = tasks[i].getElementsByTagName("createdDate")[0].firstChild.data;
         var isDone = tasks[i].getElementsByTagName("isDone")[0].firstChild.data;
-        var checked;
         $('#table').append(
             "<tr>" +
                 "<td><input class=\"checkboxIsDone\" type=\"checkbox\" id=\"" + id + "\" " + isChecked(isDone) + "></td>" +
