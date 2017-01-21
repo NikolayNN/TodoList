@@ -1,25 +1,31 @@
 package my.project.todolist.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Created by Nikol on 1/5/2017.
  */
 public class Task {
+    public static final String DATA_FORMAT = "dd.MM.yyyy HH:mm:ss";
+    private final int MILLISECONDS = 1000;
+
     private int id;
     private String description;
     private long created;
+    private String createdDate;
     private boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        created = getCurrentTime();
+        created = new Date().getTime() / MILLISECONDS;
+        retrieveCreatedDate(created);
         isDone = false;
     }
 
-    private long getCurrentTime() {
-        Date current = new Date();
-        return current.getTime()/1000;
+    private void retrieveCreatedDate(long ms){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATA_FORMAT);
+        createdDate = dateFormat.format(new Date(ms * MILLISECONDS));
     }
 
     public void setDone(boolean done) {
@@ -44,6 +50,7 @@ public class Task {
 
     public void setCreated(long created) {
         this.created = created;
+        retrieveCreatedDate(created);
     }
 
     public boolean isDone() {

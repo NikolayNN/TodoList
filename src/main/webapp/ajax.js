@@ -93,7 +93,7 @@ function drawTable(xml) {
     for (var i = 0; i < tasks.length; i++) {
         var id = tasks[i].getElementsByTagName("id")[0].firstChild.data;
         var description = tasks[i].getElementsByTagName("description")[0].firstChild.data;
-        var created = tasks[i].getElementsByTagName("created")[0].firstChild.data;
+        var created = tasks[i].getElementsByTagName("createdDate")[0].firstChild.data;
         var isDone = tasks[i].getElementsByTagName("isDone")[0].firstChild.data;
         var checked;
         $('#table').append(
