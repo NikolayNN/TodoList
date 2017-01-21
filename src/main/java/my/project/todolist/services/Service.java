@@ -16,6 +16,8 @@ public interface Service {
 
     String getNotCompletedTasksInXML();
 
-    void closeSession();
+    void changeTaskStatus(int id);
 
+    void closeSession();
+    
 }

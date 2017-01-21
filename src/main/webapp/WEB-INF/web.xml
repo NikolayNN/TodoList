@@ -27,6 +27,14 @@
         <servlet-name>NotCompletedTasks</servlet-name>
         <url-pattern>/notCompletedTasks.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangeTaskStatus</servlet-name>
+        <servlet-class>my.project.todolist.controller.servlets.ChangeTaskStatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeTaskStatus</servlet-name>
+        <url-pattern>/changeStatus.do</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>my.project.todolist.controller.listeners.ServletContextListenerImpl</listener-class>
     </listener>

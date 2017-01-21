@@ -34,7 +34,7 @@ public class HibernateManager implements DatabaseManager {
         List<Task> result = new ArrayList<>();
         Session session = HibernateSessionFactory.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("from ItemEntity");
+        Query query = session.createQuery("from ItemEntity order by id");
         session.getTransaction().commit();
         List list = query.list();
         for (Object o : list) {
@@ -73,4 +73,27 @@ public class HibernateManager implements DatabaseManager {
         HibernateSessionFactory.shutdown();
     }
 
+    @Override
+    public void changeTaskStatus(int taskId) {
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update ItemEntity set done = " + changedTaskStatus(taskId)  +
+                " where id = " + taskId);
+       query.executeUpdate();
+        session.close();
+    }
+
+    private boolean getIsDone(int taskId){
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from ItemEntity where id = " + taskId);
+        session.getTransaction().commit();
+        ItemEntity itemEntity = (ItemEntity) query.getSingleResult();
+        boolean bool = itemEntity.getDone();
+        return bool;
+    }
+
+    private boolean changedTaskStatus(int taskId){
+        return !getIsDone(taskId);
+    }
 }

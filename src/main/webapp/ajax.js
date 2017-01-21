@@ -11,9 +11,9 @@ $(document).ready(function () {
                 data: {
                     taskDescription: taskDescription
                 },
-                success: function (responseXML) {
+                success: function () {
                     clearTable();
-                    drawTable(xml);
+                    printAllTasks();
                 }
             })
         } else {
@@ -48,6 +48,28 @@ function checkboxShowNotCompletedTasks() {
         clearTable();
         printAllTasks();
     }
+}
+$(document).ready(function () {
+    var id;
+    $('#table').on('change','.checkboxIsDone', function(){
+        id = $(this).attr("id");
+        changeTaskStatus(id);
+    });
+
+});
+
+function changeTaskStatus(id){
+    $.ajax({
+        type: "POST",
+        url: "changeStatus.do",
+        data: {
+            taskId: id
+        },
+        success: function () {
+            clearTable();
+            printAllTasks();
+        }
+    })
 }
 
 function showNotCompletedTasks() {

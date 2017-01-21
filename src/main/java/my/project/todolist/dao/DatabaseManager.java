@@ -12,5 +12,5 @@ public interface DatabaseManager {
     List<Task> getTasksList();
     List<Task> getNotCompletedTasksList();
     void close();
-
+    void changeTaskStatus(int id);
 }

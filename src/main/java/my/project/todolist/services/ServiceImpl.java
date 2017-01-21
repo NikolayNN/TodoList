@@ -30,6 +30,11 @@ public class ServiceImpl implements Service {
         return toXML(databaseManager.getNotCompletedTasksList());
     }
 
+    @Override
+    public void changeTaskStatus(int id) {
+        databaseManager.changeTaskStatus(id);
+    }
+
     private String toXML(List<Task> tasks) {
         XStream xStream = new XStream();
         xStream.alias("task", Task.class);
