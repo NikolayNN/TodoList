@@ -95,7 +95,7 @@ function showNotCompletedTasks() {
 }
 
 function clearTable() {
-    $('#table tr').remove();
+    $('#table .table-data').remove();
 }
 
 function drawTable(xml) {
@@ -107,7 +107,7 @@ function drawTable(xml) {
         var created = tasks[i].getElementsByTagName("createdDate")[0].firstChild.data;
         var isDone = tasks[i].getElementsByTagName("isDone")[0].firstChild.data;
         $('#table').append(
-            "<tr>" +
+            "<tr class='table-data'>" +
                 "<td><input class=\"checkboxIsDone\" type=\"checkbox\" id=\"" + id + "\" " + isChecked(isDone) + "></td>" +
                 "<td>" + id + "</td>" +
                 "<td>" + description + "</td>" +
