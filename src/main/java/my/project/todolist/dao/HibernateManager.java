@@ -12,6 +12,9 @@ import java.util.List;
  * Created by Nikol on 1/17/2017.
  */
 public class HibernateManager implements DatabaseManager {
+    /**
+     * Hibernate session factory.
+     */
     private static SessionFactory sessionFactory;
 
     public HibernateManager() {
