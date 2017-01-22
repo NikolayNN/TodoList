@@ -12,10 +12,16 @@ import java.io.IOException;
  * Created by Nikol on 1/19/2017.
  */
 public class NotCompletedTasks extends HttpServlet {
+    /**
+     * The method write to response all not completed tasks from the database.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Service service = (Service) request.getServletContext().getAttribute("service");
         response.setContentType("text/html; charset=UTF-8");
-        response.setHeader("Cache-Control", "no-cache");
         response.getWriter().write(service.getNotCompletedTasksInXML());
     }
 
