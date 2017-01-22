@@ -18,6 +18,10 @@ public class HibernateManager implements DatabaseManager {
         sessionFactory = HibernateSessionFactory.getSessionFactory();
     }
 
+    /**
+     * The method accepts task. Cast the task to a ItemEntity and save in the database.
+     * @param task task
+     */
     @Override
     public void addTask(Task task) {
         Session session = sessionFactory.openSession();
@@ -26,6 +30,11 @@ public class HibernateManager implements DatabaseManager {
         session.close();
     }
 
+    /**
+     * The method convert the task to the itemEntity
+     * @param task task
+     * @return itemEntity
+     */
     private ItemEntity createItemFromTask(Task task) {
         ItemEntity item = new ItemEntity();
         item.setDescription(task.getDescription());
@@ -34,6 +43,10 @@ public class HibernateManager implements DatabaseManager {
         return item;
     }
 
+    /**
+     * The method get tasks list from the database ordered by id.
+     * @return tasks list.
+     */
     @Override
     public List<Task> getTasksList() {
         Session session = sessionFactory.openSession();
@@ -43,6 +56,10 @@ public class HibernateManager implements DatabaseManager {
         return convertToTasksList(list);
     }
 
+    /**
+     * The method get not completed tasks from the database.
+     * @return not completed tasks list.
+     */
     @Override
     public List<Task> getNotCompletedTasksList() {
         Session session = sessionFactory.openSession();
@@ -52,7 +69,12 @@ public class HibernateManager implements DatabaseManager {
         return convertToTasksList(list);
     }
 
-    private List<Task> convertToTasksList(List list) {
+    /**
+     * The method casts the List<Object> to the List<Tasks>.
+     * @param list list with Objects
+     * @return list with Task
+     */
+    private List<Task> convertToTasksList(List<Object> list) {
         List<Task> result = new ArrayList<>();
         for (Object o : list) {
             Task task = createTaskFromItem((ItemEntity) o);
@@ -61,6 +83,11 @@ public class HibernateManager implements DatabaseManager {
         return result;
     }
 
+    /**
+     * The method cast itemEntity to task.
+     * @param itemEntity itemEntity.
+     * @return task.
+     */
     private Task createTaskFromItem(ItemEntity itemEntity) {
         Task task = new Task(itemEntity.getDescription());
         task.setId(itemEntity.getId());
@@ -69,6 +96,10 @@ public class HibernateManager implements DatabaseManager {
         return task;
     }
 
+    /**
+     * The method change task status on opposite on the database.
+     * @param taskId taskId
+     */
     @Override
     public void changeTaskStatus(int taskId) {
         Session session = sessionFactory.openSession();
@@ -79,10 +110,20 @@ public class HibernateManager implements DatabaseManager {
         session.close();
     }
 
+    /**
+     * change task status
+     * @param taskId taskId
+     * @return opposite status
+     */
     private boolean changedTaskStatus(int taskId) {
         return !getIsDone(taskId);
     }
 
+    /**
+     * get current task status from the database.
+     * @param taskId taskId
+     * @return current task status.
+     */
     private boolean getIsDone(int taskId) {
         Session session = sessionFactory.openSession();
         Query query = session.createQuery("from ItemEntity where id = " + taskId);
@@ -90,6 +131,9 @@ public class HibernateManager implements DatabaseManager {
         return itemEntity.getDone();
     }
 
+    /**
+     * The method shutdown hibernate session factory.
+     */
     @Override
     public void close() {
         HibernateSessionFactory.shutdown();
