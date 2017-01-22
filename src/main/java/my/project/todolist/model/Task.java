@@ -23,7 +23,7 @@ public class Task {
         isDone = false;
     }
 
-    private void retrieveCreatedDate(long ms){
+    private void retrieveCreatedDate(long ms) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATA_FORMAT);
         createdDate = dateFormat.format(new Date(ms * MILLISECONDS));
     }
