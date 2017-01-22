@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Nikol on 1/17/2017.
  */
 public class HibernateManager implements DatabaseManager {
-    private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
     public HibernateManager() {
         sessionFactory = HibernateSessionFactory.getSessionFactory();
