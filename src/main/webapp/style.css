@@ -3,19 +3,20 @@
     border: 2px solid black;
     border-collapse: collapse;
 }
+
 .task-list th {
     text-align: left;
     background: #ccc;
     padding: 5px;
     border: 1px solid black;
 }
+
 .task-list td {
     padding: 5px;
     border: 1px solid black;
 }
 
-
-.loader{
+.loader {
     padding-top: 20px;
     text-align: center;
 }
