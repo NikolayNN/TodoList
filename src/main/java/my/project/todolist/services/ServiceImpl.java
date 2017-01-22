@@ -10,6 +10,9 @@ import java.util.List;
  * Created by Nikol on 1/8/2017.
  */
 public class ServiceImpl implements Service {
+    /**
+     * injected database manager.
+     */
     private DatabaseManager databaseManager;
 
     /**
