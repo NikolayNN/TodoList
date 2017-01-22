@@ -18,12 +18,11 @@ public class HibernateSessionFactory {
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
         try {
-            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-        }
-        catch (Exception e) {
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        } catch (Exception e) {
             // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
             // so destroy it manually.
-            StandardServiceRegistryBuilder.destroy( registry );
+            StandardServiceRegistryBuilder.destroy(registry);
 
             throw new ExceptionInInitializerError("Initial SessionFactory failed" + e);
         }
@@ -33,7 +32,6 @@ public class HibernateSessionFactory {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-
 
     /**
      * Close caches and connection pools.
