@@ -17,22 +17,18 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public void addTask(Task task){
+    public void addTask(Task task) {
         databaseManager.addTask(task);
     }
 
     @Override
-    public String getTasksInXML(){
+    public String getTasksInXML() {
         return toXML(databaseManager.getTasksList());
-    }
-    @Override
-    public String getNotCompletedTasksInXML(){
-        return toXML(databaseManager.getNotCompletedTasksList());
     }
 
     @Override
-    public void changeTaskStatus(int id) {
-        databaseManager.changeTaskStatus(id);
+    public String getNotCompletedTasksInXML() {
+        return toXML(databaseManager.getNotCompletedTasksList());
     }
 
     private String toXML(List<Task> tasks) {
@@ -40,6 +36,12 @@ public class ServiceImpl implements Service {
         xStream.alias("task", Task.class);
         return xStream.toXML(tasks);
     }
+
+    @Override
+    public void changeTaskStatus(int id) {
+        databaseManager.changeTaskStatus(id);
+    }
+
 
     @Override
     public void closeSession() {
