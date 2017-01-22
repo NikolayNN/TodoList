@@ -12,10 +12,16 @@ import java.io.IOException;
  * Created by Nikol on 1/8/2017.
  */
 public class AllTasks extends HttpServlet {
+    /**
+     * The method read all tasks in the database and send to the web in XML.
+     * @param request
+     * @param response 
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Service service = (Service) request.getServletContext().getAttribute("service");
         response.setContentType("text/html; charset=UTF-8");
-        response.setHeader("Cache-Control", "no-cache");
         response.getWriter().write(service.getTasksInXML());
     }
 }
