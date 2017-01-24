@@ -50,11 +50,4 @@ public class AddTaskTest {
         when(request.getParameter(taskDescription)).thenReturn("");
         addTask.doPost(request, response);
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void addTaskTaskDescriptionNULL() throws ServletException {
-        final String taskDescription = "taskDescription";
-        when(request.getParameter(taskDescription)).thenReturn(null);
-        addTask.doPost(request, response);
-    }
 }
