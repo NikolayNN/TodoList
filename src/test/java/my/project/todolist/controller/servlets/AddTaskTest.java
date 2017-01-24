@@ -1,6 +1,5 @@
 package my.project.todolist.controller.servlets;
 
-import my.project.todolist.model.Task;
 import my.project.todolist.services.Service;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,15 +32,15 @@ public class AddTaskTest {
 
     @Test
     public void addTask() throws ServletException {
-        final String taskDescription = "taskDescription";
-        final String service = "service";
-        when(request.getParameter(taskDescription)).thenReturn("testDescription");
+        final String taskDescriptionParameterName = "taskDescription";
+        final String serviceParameterName = "service";
+        when(request.getParameter(taskDescriptionParameterName)).thenReturn("testDescription");
         when(request.getServletContext()).thenReturn(servletContext);
-        when(servletContext.getAttribute(service)).thenReturn(serviceImpl);
+        when(servletContext.getAttribute(serviceParameterName)).thenReturn(serviceImpl);
         addTask.doPost(request, response);
-        verify(request, atLeastOnce()).getParameter(taskDescription);
+        verify(request, atLeastOnce()).getParameter(taskDescriptionParameterName);
         verify(request, atLeastOnce()).getServletContext();
-        verify(servletContext, atLeastOnce()).getAttribute(service);
+        verify(servletContext, atLeastOnce()).getAttribute(serviceParameterName);
         verify(serviceImpl, atLeastOnce()).addTask(anyObject());
     }
 
