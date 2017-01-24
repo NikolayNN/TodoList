@@ -12,14 +12,14 @@ public class Task {
 
     private int id;
     private String description;
-    private long created;
+    private long createdMilliseconds;
     private String createdDate;
     private boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        created = new Date().getTime() / MILLISECONDS;
-        retrieveCreatedDate(created);
+        createdMilliseconds = new Date().getTime() / MILLISECONDS;
+        retrieveCreatedDate(createdMilliseconds);
         isDone = false;
     }
 
@@ -44,17 +44,21 @@ public class Task {
         return description;
     }
 
-    public long getCreated() {
-        return created;
+    public long getCreatedMilliseconds() {
+        return createdMilliseconds;
     }
 
-    public void setCreated(long created) {
-        this.created = created;
-        retrieveCreatedDate(created);
+    public void setCreatedMilliseconds(long createdMilliseconds) {
+        this.createdMilliseconds = createdMilliseconds;
+        retrieveCreatedDate(createdMilliseconds);
     }
 
     public boolean isDone() {
         return isDone;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
     }
 
     @Override
@@ -62,8 +66,9 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", created=" + created +
+                ", createdMilliseconds=" + createdMilliseconds +
                 ", isDone=" + isDone +
                 '}';
     }
+
 }

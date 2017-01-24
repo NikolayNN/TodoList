@@ -42,7 +42,7 @@ public class HibernateManager implements DatabaseManager {
         ItemEntity item = new ItemEntity();
         item.setDescription(task.getDescription());
         item.setDone(task.isDone());
-        item.setCreated(task.getCreated());
+        item.setCreated(task.getCreatedMilliseconds());
         return item;
     }
 
@@ -94,7 +94,7 @@ public class HibernateManager implements DatabaseManager {
     private Task createTaskFromItem(ItemEntity itemEntity) {
         Task task = new Task(itemEntity.getDescription());
         task.setId(itemEntity.getId());
-        task.setCreated(itemEntity.getCreated());
+        task.setCreatedMilliseconds(itemEntity.getCreated());
         task.setDone(itemEntity.getDone());
         return task;
     }
