@@ -34,9 +34,10 @@ function printAllTasks() {
         type: "POST",
         url: "allTasks.do",
         data: {},
-        success: function (responseXML) {
-           drawTable(responseXML);
-           stopLoadingAnimation();
+        success: function (responseSource, status, xhr) {
+            var contentType = xhr.getResponseHeader("content-type");
+            drawTable(responseSource, contentType);
+            stopLoadingAnimation();
         }
     });
 }
@@ -87,9 +88,10 @@ function showNotCompletedTasks() {
     $.ajax({
         type: "POST",
         url: "notCompletedTasks.do",
-        success: function (responseXML) {
+        success: function (responseXML, status, xhr) {
+            var contentType = xhr.getResponseHeader("content-type");
             clearTable();
-            drawTable(responseXML);
+            drawTable(responseXML, contentType);
         }
     })
 }
@@ -98,9 +100,39 @@ function clearTable() {
     $('#table .table-data').remove();
 }
 
-function drawTable(xml) {
-    var doc = new DOMParser().parseFromString(xml, 'text/xml');
-    var tasks = doc.getElementsByTagName("task");
+function drawTable(source, contentType) {
+    if(contentType.indexOf("xml") > -1){
+        parseXML(source);
+    }else if(contentType.indexOf("json") > -1){
+        parseJSON(source);
+    }
+}
+
+function parseJSON(json) {
+    for(var i = 0; i < json.length; i++){
+        var id = json[i].id;
+        var description = json[i].description;
+        var created = json[i].createdDate;
+        var isDone = json[i].done;
+        if(isDone == false){
+            isDone = "false";
+        }else{
+            isDone = "true";
+        }
+        $('#table').append(
+            "<tr class='table-data'>" +
+            "<td><input class=\"checkboxIsDone\" type=\"checkbox\" id=\"" + id + "\" " + isChecked(isDone) + "></td>" +
+            "<td>" + id + "</td>" +
+            "<td>" + description + "</td>" +
+            "<td>" + created + "</td>" +
+            "<td>" + isDone + "</td>" +
+            "</tr>");
+    }
+
+}
+
+function parseXML(xml) {
+    var tasks = xml.getElementsByTagName("task");
     for (var i = 0; i < tasks.length; i++) {
         var id = tasks[i].getElementsByTagName("id")[0].firstChild.data;
         var description = tasks[i].getElementsByTagName("description")[0].firstChild.data;
@@ -108,11 +140,11 @@ function drawTable(xml) {
         var isDone = tasks[i].getElementsByTagName("isDone")[0].firstChild.data;
         $('#table').append(
             "<tr class='table-data'>" +
-                "<td><input class=\"checkboxIsDone\" type=\"checkbox\" id=\"" + id + "\" " + isChecked(isDone) + "></td>" +
-                "<td>" + id + "</td>" +
-                "<td>" + description + "</td>" +
-                "<td>" + created + "</td>" +
-                "<td>" + isDone + "</td>" +
+            "<td><input class=\"checkboxIsDone\" type=\"checkbox\" id=\"" + id + "\" " + isChecked(isDone) + "></td>" +
+            "<td>" + id + "</td>" +
+            "<td>" + description + "</td>" +
+            "<td>" + created + "</td>" +
+            "<td>" + isDone + "</td>" +
             "</tr>");
     }
 }

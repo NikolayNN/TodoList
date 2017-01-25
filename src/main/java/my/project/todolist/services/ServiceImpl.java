@@ -3,6 +3,7 @@ package my.project.todolist.services;
 import com.thoughtworks.xstream.XStream;
 import my.project.todolist.dao.DatabaseManager;
 import my.project.todolist.model.Task;
+import my.project.todolist.services.handlers.Handler;
 
 import java.util.List;
 
@@ -14,14 +15,19 @@ public class ServiceImpl implements Service {
      * injected database manager.
      */
     private DatabaseManager databaseManager;
+    private Handler handler;
 
-    /**
-     * Inject DatabaseManager.
-     * @param databaseManager injected DatabaseManager.
-     */
-    @Override
+    public ServiceImpl(DatabaseManager databaseManager, Handler handler) {
+        this.databaseManager = databaseManager;
+        this.handler = handler;
+    }
+
     public void setDatabaseManager(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
     }
 
     /**
@@ -38,8 +44,8 @@ public class ServiceImpl implements Service {
      * @return task list in xml.
      */
     @Override
-    public String getTasksInXML() {
-        return toXML(databaseManager.getTasksList());
+    public String getTasksWithHandler() {
+        return handler.handle(databaseManager.getTasksList());
     }
 
     /**
@@ -47,19 +53,8 @@ public class ServiceImpl implements Service {
      * @return task list in xml.
      */
     @Override
-    public String getNotCompletedTasksInXML() {
-        return toXML(databaseManager.getNotCompletedTasksList());
-    }
-
-    /**
-     * The method convert task list to xml/
-     * @param tasks tasks list
-     * @return xml.
-     */
-    private String toXML(List<Task> tasks) {
-        XStream xStream = new XStream();
-        xStream.alias("task", Task.class);
-        return xStream.toXML(tasks);
+    public String getNotCompletedTasksWithHandler() {
+        return handler.handle(databaseManager.getNotCompletedTasksList());
     }
 
     /**
@@ -69,6 +64,11 @@ public class ServiceImpl implements Service {
     @Override
     public void changeTaskStatus(int id) {
         databaseManager.changeTaskStatus(id);
+    }
+
+    @Override
+    public String getContentType() {
+        return handler.getContentType();
     }
 
     /**

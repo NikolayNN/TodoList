@@ -21,8 +21,8 @@ public class NotCompletedTasks extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Service service = (Service) request.getServletContext().getAttribute("service");
-        response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().write(service.getNotCompletedTasksInXML());
+        response.setContentType(service.getContentType() + "; charset=UTF-8");
+        response.getWriter().write(service.getNotCompletedTasksWithHandler());
     }
 
 }

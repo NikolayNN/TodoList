@@ -44,13 +44,13 @@ public class NotCompletedTasksTest {
         when(request.getServletContext()).thenReturn(servletContext);
         when(servletContext.getAttribute(serviceParameterName)).thenReturn(serviceImpl);
         when(response.getWriter()).thenReturn(writer);
-        when(serviceImpl.getNotCompletedTasksInXML()).thenReturn(testString);
+        when(serviceImpl.getNotCompletedTasksWithHandler()).thenReturn(testString);
 
         notCompletedTasks.doPost(request, response);
 
         verify(request, atLeastOnce()).getServletContext();
         verify(servletContext, atLeastOnce()).getAttribute(serviceParameterName);
-        verify(serviceImpl, atLeastOnce()).getNotCompletedTasksInXML();
+        verify(serviceImpl, atLeastOnce()).getNotCompletedTasksWithHandler();
         verify(writer, atLeastOnce()).write(testString);
     }
 

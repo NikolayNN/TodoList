@@ -4,6 +4,8 @@ import my.project.todolist.dao.HibernateManager;
 import my.project.todolist.dao.HibernateSessionFactory;
 import my.project.todolist.services.Service;
 import my.project.todolist.services.ServiceImpl;
+import my.project.todolist.services.handlers.JsonHandler;
+import my.project.todolist.services.handlers.XMLHandler;
 import org.hibernate.Session;
 
 import javax.servlet.ServletContextEvent;
@@ -15,8 +17,7 @@ import javax.servlet.ServletContextListener;
 public class ServletContextListenerImpl implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        Service service = new ServiceImpl();
-        service.setDatabaseManager(new HibernateManager());
+        Service service = new ServiceImpl(new HibernateManager(), new JsonHandler());
         servletContextEvent.getServletContext().setAttribute("service", service);
     }
 

@@ -43,13 +43,13 @@ public class AllTasksTest {
         when(request.getServletContext()).thenReturn(servletContext);
         when(servletContext.getAttribute(serviceParameterName)).thenReturn(serviceImpl);
         when(response.getWriter()).thenReturn(writer);
-        when(serviceImpl.getTasksInXML()).thenReturn(testString);
+        when(serviceImpl.getTasksWithHandler()).thenReturn(testString);
 
         allTasks.doPost(request, response);
 
         verify(request, atLeastOnce()).getServletContext();
         verify(servletContext, atLeastOnce()).getAttribute(serviceParameterName);
-        verify(serviceImpl, atLeastOnce()).getTasksInXML();
+        verify(serviceImpl, atLeastOnce()).getTasksWithHandler();
         verify(writer, atLeastOnce()).write(testString);
     }
 }

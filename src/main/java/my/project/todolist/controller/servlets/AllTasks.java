@@ -21,7 +21,7 @@ public class AllTasks extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Service service = (Service) request.getServletContext().getAttribute("service");
-        response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().write(service.getTasksInXML());
+        response.setContentType(service.getContentType() + "; charset=UTF-8");
+        response.getWriter().write(service.getTasksWithHandler());
     }
 }
