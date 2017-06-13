@@ -19,6 +19,7 @@ public class ServletContextListenerImpl implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         Service service = new ServiceImpl(new HibernateManager(), new JsonHandler());
         servletContextEvent.getServletContext().setAttribute("service", service);
+        //todo
     }
 
     @Override
